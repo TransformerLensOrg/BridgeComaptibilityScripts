@@ -52,7 +52,7 @@ from jaxtyping import Float
 
 import transformer_lens.utils as utils
 from transformer_lens import ActivationCache, HookedTransformer
-from transformer_lens.boot import boot
+from transformer_lens.model_bridge import TransformerBridge
 
 # %% [markdown]
 # ### PyTorch Setup
@@ -135,7 +135,7 @@ def scatter(x, y, xaxis="", yaxis="", caxis="", **kwargs):
 
 # %%
 # NBVAL_IGNORE_OUTPUT
-model = boot(
+model = TransformerBridge.boot_transformers(
     "gpt2",
     center_unembed=True,
     center_writing_weights=True,

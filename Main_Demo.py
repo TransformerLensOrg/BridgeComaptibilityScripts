@@ -27,7 +27,7 @@ from transformer_lens.hook_points import (
     HookPoint,
 )  # Hooking utilities
 from transformer_lens import HookedTransformer, FactoredMatrix
-from transformer_lens.boot import boot
+from transformer_lens.model_bridge import TransformerBridge
 
 # %% [markdown]
 # We turn automatic differentiation off, to save GPU memory, as this notebook focuses on model inference not model training.
@@ -70,7 +70,7 @@ device = utils.get_device()
 
 # %%
 # NBVAL_IGNORE_OUTPUT
-model = boot("gpt2", device=device)
+model = TransformerBridge.boot_transformers("gpt2", device=device)
 
 # %% [markdown]
 # To try the model out, let's find the loss on this text! Models can be run on a single string or a tensor of tokens (shape: [batch, position], all integers), and the possible return types are: 
@@ -393,7 +393,7 @@ model.run_with_hooks(
 
 # %%
 # NBVAL_IGNORE_OUTPUT
-distilgpt2 = boot("distilgpt2", device=device)
+distilgpt2 = TransformerBridge.boot_transformers("distilgpt2", device=device)
 
 # %%
 

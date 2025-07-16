@@ -33,6 +33,7 @@ from transformer_lens.hook_points import (
     HookPoint,
 )  # Hooking utilities
 from transformer_lens import HookedTransformer
+from transformer_lens.model_bridge import TransformerBridge
 
 torch.set_grad_enabled(False)
 
@@ -82,7 +83,7 @@ if MODEL_PATH:
     tokenizer = LlamaTokenizer.from_pretrained(MODEL_PATH)
     hf_model = LlamaForCausalLM.from_pretrained(MODEL_PATH, low_cpu_mem_usage=True)
 
-    model = boot("llama-7b", hf_model=hf_model, device="cpu", fold_ln=False, center_writing_weights=False, center_unembed=False, tokenizer=tokenizer)
+    model = TransformerBridge.boot_transformers("llama-7b", hf_model=hf_model, device="cpu", fold_ln=False, center_writing_weights=False, center_unembed=False, tokenizer=tokenizer)
 
     model = model.to("cuda" if torch.cuda.is_available() else "cpu")
     model.generate("The capital of Germany is", max_new_tokens=20, temperature=0)
@@ -121,7 +122,7 @@ hf_model = AutoModelForCausalLM.from_pretrained(LLAMA_2_7B_CHAT_PATH,
 
 tokenizer = AutoTokenizer.from_pretrained(LLAMA_2_7B_CHAT_PATH)
 
-model = boot(LLAMA_2_7B_CHAT_PATH,
+model = TransformerBridge.boot_transformers(LLAMA_2_7B_CHAT_PATH,
                                              hf_model=hf_model,
                                              dtype=inference_dtype,
                                              fold_ln=False,

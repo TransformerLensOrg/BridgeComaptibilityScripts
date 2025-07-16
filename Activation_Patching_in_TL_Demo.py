@@ -51,14 +51,14 @@ torch.set_grad_enabled(False)
 
 # %%
 import transformer_lens.patching as patching
-from transformer_lens.boot import boot
+from transformer_lens.model_bridge import TransformerBridge
 
 # %% [markdown]
 #  ## Activation Patching Setup
 #  This just copies the relevant set up from Exploratory Analysis Demo, and isn't very important.
 
 # %%
-model = boot("gpt2")
+model = TransformerBridge.boot_transformers("gpt2")
 
 # %%
 prompts = ['When John and Mary went to the shops, John gave the bag to', 'When John and Mary went to the shops, Mary gave the bag to', 'When Tom and James went to the park, James gave the ball to', 'When Tom and James went to the park, Tom gave the ball to', 'When Dan and Sid went to the shops, Sid gave an apple to', 'When Dan and Sid went to the shops, Dan gave an apple to', 'After Martin and Amy went to the park, Amy gave a drink to', 'After Martin and Amy went to the park, Martin gave a drink to']
@@ -137,7 +137,7 @@ DO_SLOW_RUNS = True
 #  ### Setup
 
 # %%
-attn_only = boot("attn-only-2l") # TODO: this is one of Neel's models, does this make sense with boot?
+attn_only = TransformerBridge.boot_transformers("attn-only-2l") # TODO: this is one of Neel's models, does this make sense with boot?
 batch = 4
 seq_len = 20
 rand_tokens_A = torch.randint(100, 10000, (batch, seq_len)).to(attn_only.cfg.device)

@@ -24,7 +24,7 @@ import transformer_lens.utils as utils
 from transformer_lens.hook_points import (
     HookPoint,
 )  # Hooking utilities
-from transformer_lens.boot import boot
+from transformer_lens.model_bridge import TransformerBridge
 
 # %% [markdown]
 # ## Helper Funcs
@@ -88,7 +88,7 @@ def draw_logit_lens(num_layers, seq_len, orig_tokens, tokens, values):
 # %%
 # NBVAL_IGNORE_OUTPUT
 # I'm using an M2 macbook air, so I use CPU for better support
-model = boot("gpt2", device="cpu")
+model = TransformerBridge.boot_transformers("gpt2", device="cpu")
 model.eval()
 
 # %% [markdown]

@@ -27,14 +27,14 @@
 # %%
 import torch
 from transformer_lens import HookedTransformer
-from transformer_lens.boot import boot
+from transformer_lens.model_bridge import TransformerBridge
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
 # %%
 # Load the 3 billion parameters version in 16 bits
 # You can increase the precision or the size if you have enough GPU RAM available
-model = boot("stabilityai/stablelm-tuned-alpha-3b", torch_dtype=torch.bfloat16, device=device)
+model = TransformerBridge.boot_transformers("stabilityai/stablelm-tuned-alpha-3b", torch_dtype=torch.bfloat16, device=device)
 
 # %%
 # This is the system prompt used by Stability AI (https://huggingface.co/stabilityai/stablelm-tuned-alpha-3b).

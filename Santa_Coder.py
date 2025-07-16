@@ -37,7 +37,7 @@ from transformer_lens.hook_points import (
     HookPoint,
 )  # Hooking utilities
 from transformer_lens import HookedTransformer, HookedTransformerConfig, FactoredMatrix, ActivationCache
-from transformer_lens.boot import boot
+from transformer_lens.model_bridge import TransformerBridge
 
 torch.set_grad_enabled(False)
 
@@ -61,7 +61,7 @@ model = AutoModelForCausalLM.from_pretrained("bigscience/bloom-560m")
 # %%
 # Disable folding norms and folding norms and biases so that intermediate value
 # in between transformer blocks can be compared
-bloom = boot("bloom-560m",fold_ln=False, fold_value_biases=False, center_writing_weights=False)
+bloom = TransformerBridge.boot_transformers("bloom-560m",fold_ln=False, fold_value_biases=False, center_writing_weights=False)
 
 # %%
 text = '''

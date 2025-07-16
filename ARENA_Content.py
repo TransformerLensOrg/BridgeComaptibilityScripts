@@ -1,5 +1,5 @@
 from transformer_lens import HookedTransformer, HookedTransformerConfig
-from transformer_lens.boot import boot
+from transformer_lens.model_bridge import TransformerBridge
 import torch as t
 
 device = t.device("cuda" if t.cuda.is_available() else "cpu")
@@ -8,7 +8,7 @@ device = t.device("cuda" if t.cuda.is_available() else "cpu")
 # NBVAL_IGNORE_OUTPUT
 
 
-reference_gpt2 = boot(
+reference_gpt2 = TransformerBridge.boot_transformers(
     "gpt2-small",
     fold_ln=False,
     center_unembed=False,

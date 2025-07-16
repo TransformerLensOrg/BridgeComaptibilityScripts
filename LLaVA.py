@@ -29,7 +29,7 @@ import matplotlib.pyplot as plt
 %matplotlib inline
 
 from transformer_lens import HookedTransformer
-from transformer_lens.boot import boot
+from transformer_lens.model_bridge import TransformerBridge
 import circuitsvis as cv
 
 _ = torch.set_grad_enabled(False)
@@ -106,7 +106,7 @@ def get_llm_input_embeddings(llava, processor, image: Image, text: str, device='
 # Okay, now create HookedTransformer model
 
 # %%
-hooked_llm = boot(
+hooked_llm = TransformerBridge.boot_transformers(
 	"llama-7b-hf",  # Use config of llama
 	center_unembed=False, 
 	fold_ln=False, 

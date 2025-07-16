@@ -76,7 +76,7 @@ from transformer_lens import (
     ActivationCache,
 )
 
-from transformer_lens.boot import boot
+from transformer_lens.model_bridge import TransformerBridge
 
 # %% [markdown]
 #  Plotting helper functions from a janky personal library of plotting utils. The library is not documented and I recommend against trying to read it, just use your preferred plotting library if you want to do anything non-obvious:
@@ -92,7 +92,7 @@ import transformer_lens.patching as patching
 #  This just copies the relevant set up from Exploratory Analysis Demo, and isn't very important.
 
 # %%
-model = boot("gpt2")
+model = TransformerBridge.boot_transformers("gpt2")
 model.set_use_attn_result(True)
 
 # %%

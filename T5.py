@@ -14,10 +14,10 @@ import torch
 
 from transformers import AutoTokenizer
 from transformer_lens import HookedEncoderDecoder
-from transformer_lens.boot import boot
+from transformer_lens.model_bridge import TransformerBridge
 
 model_name = "t5-small"
-model = boot(model_name)
+model = TransformerBridge.boot_transformers(model_name)
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 
 # %%
